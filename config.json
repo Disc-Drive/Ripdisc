@@ -1,0 +1,21 @@
+{
+  "nas": {
+    "enabled": true,
+    "host": "pi-nas",
+    "username": "disc_drive",
+    "paths": [
+      {
+        "name": "Movies",
+        "path": "/srv/dev-disk-by-uuid-b0eefe21-583b-4845-b2d8-ee149e9cf200/Home/Plex Folders/Movies"
+      },
+      {
+        "name": "TV",
+        "path": "/srv/dev-disk-by-uuid-b0eefe21-583b-4845-b2d8-ee149e9cf200/Home/Plex Folders/TV Shows"
+      },
+      {
+        "name": "Criterion Collection",
+        "path": "/srv/dev-disk-by-uuid-b0eefe21-583b-4845-b2d8-ee149e9cf200/Home/Plex Folders/Criterion Collection"
+      }
+    ]
+  }
+}

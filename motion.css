@@ -1,0 +1,37 @@
+button {
+    transition: transform 0.12s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+.b1 { animation: floatA 18s ease-in-out infinite; }
+.b2 { animation: floatA 23s ease-in-out infinite; }
+.b3 { animation: floatA 20s ease-in-out infinite; }
+.b4 { animation: floatA 26s ease-in-out infinite; }
+
+.b5 { animation: floatB 30s ease-in-out infinite; }
+.b6 { animation: floatB 34s ease-in-out infinite; }
+.b7 { animation: floatB 28s ease-in-out infinite; }
+.b8 { animation: floatB 32s ease-in-out infinite; }
+
+@keyframes floatA {
+    50% { transform: translate(10px, -20px); }
+}
+
+@keyframes floatB {
+    50% { transform: translate(-15px, 25px); }
+}
+
+body::before {
+    animation: drift 25s ease-in-out infinite;
+}
+
+@keyframes drift {
+    50% { transform: translateY(40px); }
+}

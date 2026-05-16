@@ -1,0 +1,34 @@
+{
+  "name": "ripdisc",
+  "version": "1.0.0",
+  "description": "Disc ripping tool with MakeMKV and HandBrake",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.ripdisc.app",
+    "productName": "Ripdisc",
+    "files": [
+      "**/*",
+      "!node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!node_modules/*.d.ts",
+      "!node_modules/.bin"
+    ],
+    "extraResources": [
+      {
+        "from": "Ripdisc.ps1",
+        "to": "Ripdisc.ps1"
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    }
+  }
+}

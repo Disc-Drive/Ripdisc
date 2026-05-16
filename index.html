@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="aero.css">
+  <link rel="stylesheet" href="motion.css">
+</head>
+
+<body>
+
+<div class="bubbles layer1">
+  <div class="bubble b1"></div>
+  <div class="bubble b2"></div>
+  <div class="bubble b3"></div>
+  <div class="bubble b4"></div>
+</div>
+
+<div class="bubbles layer2">
+  <div class="bubble b5"></div>
+  <div class="bubble b6"></div>
+  <div class="bubble b7"></div>
+  <div class="bubble b8"></div>
+</div>
+
+<div class="bubbles layer3">
+  <div class="bubble b9"></div>
+  <div class="bubble b10"></div>
+  <div class="bubble b11"></div>
+  <div class="bubble b12"></div>
+  <div class="bubble b13"></div>
+  <div class="bubble b14"></div>
+  <div class="bubble b15"></div>
+  <div class="bubble b16"></div>
+</div>
+
+<div class="app">
+
+<h2>Ripdisc</h2>
+
+<div class="panel">
+  <label>Disc Name</label>
+  <input id="discName">
+  <select id="driveSelect"></select>
+</div>
+
+<div class="panel">
+  <h3>Destination</h3>
+  <div id="destContainer"></div>
+</div>
+
+<button class="start-btn" onclick="start()">Start</button>
+
+<div class="panel log-panel">
+  <h3>Activity</h3>
+  <pre id="log"></pre>
+</div>
+
+</div>
+
+<script src="renderer.js"></script>
+</body>
+</html>

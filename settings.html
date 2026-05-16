@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="aero.css">
+  <link rel="stylesheet" href="motion.css">
+</head>
+
+<body class="settings">
+
+<div class="app">
+
+<h2>NAS Settings</h2>
+
+<div class="panel">
+  <label>
+    <input type="checkbox" id="enableNAS" onchange="toggleFields()">
+    Enable NAS
+  </label>
+</div>
+
+<div id="fields">
+
+<div class="panel">
+  <h3>Connection</h3>
+
+  <input id="host" placeholder="Host">
+  <br><br>
+
+  <input id="user" placeholder="Username">
+</div>
+
+<div class="panel">
+  <h3>Destinations</h3>
+
+  <div id="pathList"></div>
+
+  <br>
+  <button onclick="addPath()">Add New</button>
+</div>
+
+<div class="panel">
+  <h3>Drive Selection</h3>
+
+  <select id="driveLetter">
+    <option value="">Select Drive</option>
+    <option value="D">D:</option>
+    <option value="E">E:</option>
+    <option value="F">F:</option>
+  </select>
+</div>
+
+</div>
+
+<div class="panel">
+  <button onclick="save()">Save</button>
+</div>
+
+</div>
+
+<script>
+let paths = [];
+
+async function load() {
+  const cfg = await window.api.getConfig();
+  if (!cfg) return;
+
+  const nas = cfg.nas || {};
+
+  document.getElementById('enableNAS').checked = nas.enabled || false;
+  document.getElementById('host').value = nas.host || "";
+  document.getElementById('user').value = nas.username || "";
+  document.getElementById('driveLetter').value = cfg.driveLetter || "";
+
+  paths = nas.paths || [];
+
+  renderPaths();
+  toggleFields();
+}
+
+function toggleFields() {
+  const enabled = document.getElementById('enableNAS').checked;
+  document.getElementById('fields').style.display = enabled ? 'block' : 'none';
+}
+
+function renderPaths() {
+  const container = document.getElementById('pathList');
+  container.innerHTML = "";
+
+  paths.forEach((p, i) => {
+    container.innerHTML += `
+      <div>
+        <input value="${p.name}" onchange="updateName(${i}, this.value)">
+        <input value="${p.path}" onchange="updatePath(${i}, this.value)">
+        <button onclick="removePath(${i})">X</button>
+      </div><br>
+    `;
+  });
+}
+
+function addPath() {
+  paths.push({ name: "", path: "" });
+  renderPaths();
+}
+
+function removePath(i) {
+  paths.splice(i, 1);
+  renderPaths();
+}
+
+function updateName(i, value) {
+  paths[i].name = value;
+}
+
+function updatePath(i, value) {
+  paths[i].path = value;
+}
+
+async function save() {
+  const existing = await window.api.getConfig();
+
+  existing.nas = {
+    enabled: document.getElementById('enableNAS').checked,
+    host: document.getElementById('host').value,
+    username: document.getElementById('user').value,
+    paths: paths
+  };
+
+  existing.driveLetter = document.getElementById('driveLetter').value;
+
+  await window.api.saveConfig(existing);
+
+  setTimeout(() => window.close(), 100);
+}
+
+window.onload = load;
+</script>
+
+</body>
+</html>
